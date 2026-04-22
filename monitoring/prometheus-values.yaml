@@ -1,0 +1,6 @@
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+      - job_name: 'node-app'
+        static_configs:
+          - targets: ['backend-service:3000']
