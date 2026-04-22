@@ -56,12 +56,9 @@ jobs:
 
       - name: 9. Scanner l'image Docker frontend avec Trivy
         run: |
-          sudo apt-get update -q
-          sudo apt-get install -y wget
-          wget -q https://github.com/aquasecurity/trivy/releases/download/v0.45.0/trivy_0.45.0_Linux-64bit.deb
-          sudo dpkg -i trivy_0.45.0_Linux-64bit.deb
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           trivy image --severity HIGH,CRITICAL frontend-app:latest
-
+          
       - name: 10. Audit des dépendances frontend
         run: |
           cd frontend
@@ -113,10 +110,7 @@ jobs:
 
       - name: 9. Scanner l'image Docker avec Trivy
         run: |
-          sudo apt-get update -q
-          sudo apt-get install -y wget
-          wget -q https://github.com/aquasecurity/trivy/releases/download/v0.45.0/trivy_0.45.0_Linux-64bit.deb
-          sudo dpkg -i trivy_0.45.0_Linux-64bit.deb
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           trivy image --severity HIGH,CRITICAL backend-app:latest
 
       - name: 10. Audit des dépendances backend
